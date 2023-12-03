@@ -1,0 +1,102 @@
+post:
+  tags : 
+  - grocery-store
+  operationId: orderGroceryItems
+  summary : This API for order grocery items
+  
+  description :  This API for order grocery items
+  
+  parameters : 
+     - $ref: '../common/common-requestheaders.yaml#/Accept'
+     - $ref: '../common/common-requestheaders.yaml#/CorrelationId'
+  
+  requestBody:
+      description: Grocery items details
+      required: true
+      content:
+          application/json:
+            schema: 
+               $ref: '#/components/schemas/OrderGroceryItemRequest'
+ 
+ 
+  responses:
+     '200':
+       description: Successfull
+       headers :
+          correlationId:
+            schema :
+              type: string
+            description: "Helps in getting the flow of the request when we log the correlationld"
+       
+       
+
+     '400':
+        description: Invalid Input
+        headers :
+          CorrelationId:
+            schema :
+               type: string
+            description: "Helps in getting the flow of the request when we log the correlationid"
+        content :
+            application/json:
+              schema :
+                $ref: '../common/error-response.yaml'
+               
+     '404':
+         description: Resource not Found
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+                  
+     
+     '500':
+         description: Internal Server Error
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+      
+     '503':
+         description: Service request currently not available
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+                  
+components:
+  schemas : 
+     OrderGroceryItemRequest:
+       title : OrderGroceryItemRequest
+       type : object
+       properties:
+         orderList:
+             type: array
+             items:
+               $ref : '#/components/schemas/GroceryOrderItem'
+         
+         
+     GroceryOrderItem:
+       title : GroceryOrderItem
+       type : object  
+       properties:
+          itemId:
+            type: integer
+          quantity:
+            type: integer
+     

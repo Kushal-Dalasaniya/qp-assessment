@@ -1,0 +1,18 @@
+type: object
+required:
+  - code
+  - status
+  - message
+properties :
+  code :
+    type: string
+    example: 422
+    description: "Error code"
+  status :
+    type: integer
+    example: 1000
+    description: "HTTP code"
+  message :
+    type: string
+    example: Unexpected value.
+    description: "Error Message"

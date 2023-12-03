@@ -1,0 +1,27 @@
+openapi: 3.0.0
+
+info :
+  version : 0.0.1
+  title : grocery-api
+  description :
+    A RESTful API for managing grocery items, orders, and inventory in a virtual grocery store.
+    
+ 
+paths :
+  '/v1/grocery-items':
+   $ref : "./grocery-store/grocery.yaml"
+  
+  '/v1/authenticate/login':
+   $ref : "./authenticate/login.yaml"
+  
+  '/v1/authenticate/register':
+   $ref : "./authenticate/register-user.yaml"
+  
+  '/v1/grocery-items/{itemId}':
+   $ref : "./grocery-store/grocery-admin-api.yaml"
+   
+  '/v1/grocery-items/{itemId}/manage-inventory':
+   $ref : "./grocery-store/manage-grocery-item.yaml"
+  
+  '/v1/orders':
+   $ref : "./grocery-store/order-grocery-item.yaml"

@@ -1,0 +1,16 @@
+ Accept:
+   name: Accept
+   in: header
+   description: Supported Content Type- application/json
+   schema :
+     type: string
+     pattern : application/json
+   required: true
+ 
+ CorrelationId:
+   name: CorrelationId
+   in: header
+   description: A unique identifier value that is attached to requests that allow reference to a particular transaction.
+   schema :
+     type: string
+   required: true

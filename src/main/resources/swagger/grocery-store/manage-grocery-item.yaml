@@ -1,0 +1,102 @@
+patch:
+  tags : 
+  - grocery-store
+  operationId: manageGroceryItem
+  summary : This API for manage Grocery Item
+  
+  description :  This API for manage Grocery Item
+  
+  parameters : 
+     - $ref: '../common/common-requestheaders.yaml#/Accept'
+     - $ref: '../common/common-requestheaders.yaml#/CorrelationId'
+     
+     - in: path
+       description: Item ID.
+       name: itemId   
+       required: true
+       schema:
+          type: integer
+ 
+  
+  requestBody:
+      description: Grocery items details
+      required: true
+      content:
+          application/json:
+            schema: 
+               $ref: '#/components/schemas/ManageGroceryItemRequest'
+ 
+ 
+  responses:
+     '200':
+       description: Successfull
+       headers :
+          correlationId:
+            schema :
+              type: string
+            description: "Helps in getting the flow of the request when we log the correlationld"
+       
+       
+
+     '400':
+        description: Invalid Input
+        headers :
+          CorrelationId:
+            schema :
+               type: string
+            description: "Helps in getting the flow of the request when we log the correlationid"
+        content :
+            application/json:
+              schema :
+                $ref: '../common/error-response.yaml'
+               
+     '404':
+         description: Resource not Found
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+                  
+     
+     '500':
+         description: Internal Server Error
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+      
+     '503':
+         description: Service request currently not available
+         headers :
+           CorrelationId:
+             schema :
+                type: string
+             description: "Helps in getting the flow of the request when ve log the correlationid"
+         content :
+             application/json:
+                schema :
+                  $ref: '../common/error-response.yaml'
+ 
+components:
+  schemas :
+      ManageGroceryItemRequest:
+          title : ManageGroceryItemRequest
+          type : object
+          properties:
+             action: 
+               type: string
+               enum:
+                - increase
+                - decrease
+             quantity:
+               type: integer

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.store</groupId>
+	<artifactId>grocery</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>grocery</name>
+	<description>A RESTful API for managing grocery items, orders, and inventory in a virtual grocery store.</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.postgresql</groupId>
+    		<artifactId>postgresql</artifactId>
+    		<scope>runtime</scope>
+		</dependency>
+
+ 		<dependency>
+		    <groupId>io.swagger.parser.v3</groupId>
+		    <artifactId>swagger-parser</artifactId>
+		    <version>2.1.1</version>
+		</dependency>
+
+		 <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.32</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        
+        <!-- Logs dependency -->
+        <dependency>
+		    <groupId>net.logstash.logback</groupId>
+		    <artifactId>logstash-logback-encoder</artifactId>
+    		<version>7.4</version>
+    	</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version>
+		</dependency>
+		 <!-- end -->
+		 
+		 <dependency> 
+            <groupId>org.springframework.boot</groupId> 
+            <artifactId>spring-boot-starter-security</artifactId> 
+        </dependency> 
+        
+        <dependency> 
+            <groupId>org.springframework.security</groupId> 
+            <artifactId>spring-security-test</artifactId> 
+            <scope>test</scope> 
+        </dependency>
+		 
+		 <!-- Jwt dependency -->
+		  <dependency> 
+            <groupId>io.jsonwebtoken</groupId> 
+            <artifactId>jjwt-api</artifactId> 
+            <version>0.11.5</version> 
+        </dependency> 
+        <dependency> 
+            <groupId>io.jsonwebtoken</groupId> 
+            <artifactId>jjwt-impl</artifactId> 
+            <version>0.11.5</version> 
+        </dependency> 
+        <dependency> 
+            <groupId>io.jsonwebtoken</groupId> 
+            <artifactId>jjwt-jackson</artifactId> 
+            <version>0.11.5</version> 
+        </dependency> 
+        <!-- end -->
+		 
+		 <dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.2</version>
+  		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+			    <groupId>io.swagger.codegen.v3</groupId>
+			    <artifactId>swagger-codegen-maven-plugin</artifactId>
+			    <version>3.0.51</version>
+			    
+			    <dependencies>
+			    	<dependency>
+			    	<groupId>com.github.jknack</groupId>
+			    	<artifactId>handlebars</artifactId>
+			    	<version>4.3.0</version>
+			    	</dependency>
+			    </dependencies>
+			    <executions>
+			       <execution>  
+			          <?m2e execute onConfiguration?>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			                <inputSpec>${project.basedir}/src/main/resources/swagger/grocery-api.yaml</inputSpec>
+			                <language>spring</language>
+			                <output>${project.basedir}</output>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+			                <apiPackage>com.store.grocery.controller</apiPackage>
+			                <modelPackage>com.store.grocery.model</modelPackage>
+			                <configOptions>
+			                   <interfaceOnly>true</interfaceOnly>
+			                   <useTags>true</useTags>
+			                </configOptions>
+			            </configuration>
+			       </execution>
+			   </executions>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+	</build>
+
+</project>
